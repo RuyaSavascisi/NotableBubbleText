@@ -12,7 +12,7 @@ public record AddBubblePayload(UUID mobUUID, String author, String message) impl
 	public static final StreamCodec<FriendlyByteBuf, AddBubblePayload> CODEC = CustomPacketPayload.codec(
 			AddBubblePayload::write,
 			AddBubblePayload::new);
-	public static final Type<AddBubblePayload> ID = CustomPacketPayload.createType(new ResourceLocation(NotableBubbleText.MOD_ID, "add_bubble").toString());
+	public static final Type<AddBubblePayload> ID = new Type<>(ResourceLocation.fromNamespaceAndPath(NotableBubbleText.MOD_ID, "add_bubble"));
 
 	public AddBubblePayload(final FriendlyByteBuf buffer) {
 		this(buffer.readUUID(), buffer.readUtf(), buffer.readUtf());

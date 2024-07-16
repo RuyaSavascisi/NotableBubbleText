@@ -43,7 +43,7 @@ public class ClientHandler {
 		if (!author.isEmpty()) {
 			List<BubbleText> bubbles = BubbleHandler.getBubbles(author);
 			if (bubbles.isEmpty()) return;
-			BubbleText bubble = bubbles.get(0);
+			BubbleText bubble = bubbles.getFirst();
 
 			final Level level = mc.level;
 			if (level == null) return;
@@ -99,7 +99,7 @@ public class ClientHandler {
 
 		List<BubbleText> bubbles = BubbleHandler.getPlayerBubbles(player.getUUID());
 		if (!bubbles.isEmpty()) {
-			BubbleText bubble = bubbles.get(0);
+			BubbleText bubble = bubbles.getFirst();
 
 			final Level level = mc.level;
 			if (level == null) return;
@@ -146,7 +146,7 @@ public class ClientHandler {
 			String messageText = message.getString();
 			List<Component> siblings = message.getSiblings();
 			if (!siblings.isEmpty()) {
-				String lastText = siblings.get(siblings.size() - 1).getString();
+				String lastText = siblings.getLast().getString();
 				if (!lastText.isEmpty())
 					messageText = lastText;
 			}

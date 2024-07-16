@@ -20,11 +20,11 @@ import org.joml.Matrix4f;
 import java.util.List;
 
 public class BubbleRenderer {
-	private static final ResourceLocation BUBBLE_TEXTURE = new ResourceLocation(NotableBubbleText.MOD_ID, "textures/block/bubble.png");
+	private static final ResourceLocation BUBBLE_TEXTURE = ResourceLocation.fromNamespaceAndPath(NotableBubbleText.MOD_ID, "textures/block/bubble.png");
 
 	public static void renderBubbleText(BubbleText bubble, PoseStack poseStack, Font font, MultiBufferSource buffer,
-										EntityRenderDispatcher renderDispatcher, float entityHeight, float alpha,
-										int light, double nameOffset) {
+	                                    EntityRenderDispatcher renderDispatcher, float entityHeight, float alpha,
+	                                    int light, double nameOffset) {
 
 		String text = bubble.text();
 		MutableComponent component = Component.literal(text).withStyle(ChatFormatting.BLACK);
@@ -130,8 +130,8 @@ public class BubbleRenderer {
 	 * @param light          The light value
 	 */
 	public static void drawTexture(Matrix4f pose, VertexConsumer vertexConsumer, float x, float y, float u, float v,
-								   float uWidth, float vHeight, float renderWidth, float renderHeight,
-								   float textureWidth, float textureHeight, float alpha, int light) {
+	                               float uWidth, float vHeight, float renderWidth, float renderHeight,
+	                               float textureWidth, float textureHeight, float alpha, int light) {
 		drawTexture(pose, vertexConsumer, x, y, 0.0F, u, v, uWidth, vHeight, renderWidth, renderHeight, textureWidth, textureHeight, alpha, light);
 	}
 
@@ -155,34 +155,30 @@ public class BubbleRenderer {
 	 * @param light          The light value
 	 */
 	public static void drawTexture(Matrix4f pose, VertexConsumer vertexConsumer, float x, float y, float z, float u, float v,
-								   float uWidth, float vHeight, float renderWidth, float renderHeight,
-								   float textureWidth, float textureHeight, float alpha, int light) {
+	                               float uWidth, float vHeight, float renderWidth, float renderHeight,
+	                               float textureWidth, float textureHeight, float alpha, int light) {
 		float wRatio = 1 / textureWidth;
 		float hRatio = 1 / textureHeight;
 
-		vertexConsumer.vertex(pose, x, y + renderHeight, z)
-				.color(1.0F, 1.0F, 1.0F, alpha)
-				.uv(u * wRatio, (v + vHeight) * hRatio)
-				.uv2(light)
-				.overlayCoords(OverlayTexture.NO_OVERLAY)
-				.endVertex();
-		vertexConsumer.vertex(pose, x + renderWidth, y + renderHeight, z)
-				.color(1.0F, 1.0F, 1.0F, alpha)
-				.uv((u + uWidth) * wRatio, (v + vHeight) * hRatio)
-				.uv2(light)
-				.overlayCoords(OverlayTexture.NO_OVERLAY)
-				.endVertex();
-		vertexConsumer.vertex(pose, x + renderWidth, y, z)
-				.color(1.0F, 1.0F, 1.0F, alpha)
-				.uv((u + uWidth) * wRatio, v * hRatio)
-				.uv2(light)
-				.overlayCoords(OverlayTexture.NO_OVERLAY)
-				.endVertex();
-		vertexConsumer.vertex(pose, x, y, z)
-				.color(1.0F, 1.0F, 1.0F, alpha)
-				.uv(u * wRatio, v * hRatio)
-				.uv2(light)
-				.overlayCoords(OverlayTexture.NO_OVERLAY)
-				.endVertex();
+		vertexConsumer.addVertex(pose, x, y + renderHeight, z)
+				.setColor(1.0F, 1.0F, 1.0F, alpha)
+				.setUv(u * wRatio, (v + vHeight) * hRatio)
+				.setLight(light)
+				.setOverlay(OverlayTexture.NO_OVERLAY);
+		vertexConsumer.addVertex(pose, x + renderWidth, y + renderHeight, z)
+				.setColor(1.0F, 1.0F, 1.0F, alpha)
+				.setUv((u + uWidth) * wRatio, (v + vHeight) * hRatio)
+				.setLight(light)
+				.setOverlay(OverlayTexture.NO_OVERLAY);
+		vertexConsumer.addVertex(pose, x + renderWidth, y, z)
+				.setColor(1.0F, 1.0F, 1.0F, alpha)
+				.setUv((u + uWidth) * wRatio, v * hRatio)
+				.setLight(light)
+				.setOverlay(OverlayTexture.NO_OVERLAY);
+		vertexConsumer.addVertex(pose, x, y, z)
+				.setColor(1.0F, 1.0F, 1.0F, alpha)
+				.setUv(u * wRatio, v * hRatio)
+				.setLight(light)
+				.setOverlay(OverlayTexture.NO_OVERLAY);
 	}
 }

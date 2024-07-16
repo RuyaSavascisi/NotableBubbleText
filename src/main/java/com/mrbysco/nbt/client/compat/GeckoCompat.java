@@ -33,7 +33,7 @@ public class GeckoCompat {
 			if (!author.isEmpty()) {
 				List<BubbleText> bubbles = BubbleHandler.getBubbles(author);
 				if (bubbles.isEmpty()) return;
-				BubbleText bubble = bubbles.get(0);
+				BubbleText bubble = bubbles.getFirst();
 
 				final Level level = mc.level;
 				if (level == null) return;

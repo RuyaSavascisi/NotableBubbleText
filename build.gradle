@@ -85,7 +85,7 @@ dependencies {
 
 //    localRuntime "mezz.jei:jei-${mc_version}-neoforge:${jei_version}"
 
-    implementation "curse.maven:geckolib-388172:5460144"
+    implementation "curse.maven:geckolib-388172:5874016"
 }
 
 jar {

@@ -1,1 +1,2 @@
-* Initial update to 1.21
+* Fix bubble rendering
+* Enable in-game configuration screen

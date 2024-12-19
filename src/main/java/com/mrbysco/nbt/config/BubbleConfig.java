@@ -17,8 +17,8 @@ public class BubbleConfig {
 		public final ModConfigSpec.BooleanValue showUsername;
 
 		Client(ModConfigSpec.Builder builder) {
-			builder.comment("General settings")
-					.push("General");
+			builder.comment("Client settings")
+					.push("client");
 
 			maxTextWidth = builder
 					.comment("The maximum width of the bubble text before it wraps to a new line")
@@ -58,7 +58,7 @@ public class BubbleConfig {
 
 		Common(ModConfigSpec.Builder builder) {
 			builder.comment("General settings")
-					.push("General");
+					.push("general");
 
 			nameKey = builder
 					.comment("The name for the key used to store the bubble owners' name in the entity's persistent data")

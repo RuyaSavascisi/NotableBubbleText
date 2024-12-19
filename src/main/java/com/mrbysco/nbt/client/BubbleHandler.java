@@ -47,7 +47,7 @@ public class BubbleHandler {
 		List<BubbleText> bubbleList = bubbleMap.getOrDefault(author, new ArrayList<>());
 		if (!bubbleList.contains(bubbleText)) return false;
 		bubbleList.remove(bubbleText);
-		if (bubbleMap.isEmpty()) {
+		if (bubbleMap.getOrDefault(author, new ArrayList<>()).isEmpty()) {
 			bubbleMap.remove(author);
 		} else {
 			bubbleMap.put(author, bubbleList);

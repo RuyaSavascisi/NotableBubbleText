@@ -2,25 +2,21 @@ package com.mrbysco.nbt.client.util;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
-import com.mrbysco.nbt.NotableBubbleText;
 import com.mrbysco.nbt.client.ConfigCache;
 import com.mrbysco.nbt.command.BubbleText;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.renderer.MultiBufferSource;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderDispatcher;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import org.joml.Matrix4f;
 
 import java.util.List;
 
 public class BubbleRenderer {
-	private static final ResourceLocation BUBBLE_TEXTURE = ResourceLocation.fromNamespaceAndPath(NotableBubbleText.MOD_ID, "textures/block/bubble.png");
 
 	public static void renderBubbleText(BubbleText bubble, PoseStack poseStack, Font font, MultiBufferSource buffer,
 	                                    EntityRenderDispatcher renderDispatcher, float entityHeight, float alpha,
@@ -42,13 +38,12 @@ public class BubbleRenderer {
 		if (sequences.size() > 1)
 			poseStack.translate(0.0D, (0.1F * sequences.size()), 0.0D);
 		poseStack.mulPose(renderDispatcher.cameraOrientation());
-		poseStack.scale(-0.025F, -0.025F, -0.025F);
+		poseStack.scale(0.025F, -0.025F, 0.025F);
 
-		RenderType bubbleType = BubbleRenderType.bubble(BUBBLE_TEXTURE);
-		VertexConsumer bubbleBuffer = buffer.getBuffer(bubbleType);
+		VertexConsumer bubbleBuffer = buffer.getBuffer(BubbleRenderType.BUBBLE);
 		renderBubble(poseStack, pose, bubbleBuffer, textWidth, textHeight, alpha, light);
 		if (buffer instanceof MultiBufferSource.BufferSource source) {
-			source.endBatch(bubbleType);
+			source.endBatch(BubbleRenderType.BUBBLE);
 		}
 
 		poseStack.translate(0.0D, 0.0D, 0.01D);
